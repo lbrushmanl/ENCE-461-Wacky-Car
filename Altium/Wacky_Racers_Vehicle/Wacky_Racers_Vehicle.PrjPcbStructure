@@ -1,0 +1,3 @@
+Record=TopLevelDocument|FileName=Car_MCU.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Car_MCU.SchDoc|FileName=Car_Peripherals.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=Car_MCU.SchDoc|FileName=Car_Power.SchDoc|SheetNumber=3

@@ -1,0 +1,581 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://K:\Users\Public\Documents\Altium\AD23\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">18/03/2023</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">12:54:47 pm</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc" class="file"><acronym title="W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc">W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">83</td></tr>
+</table>
+</td>
+</table><a name="IDINGVIR1V5DVCBP2A22HYRKC3FFH2EU4UXOCU2WITAVQ5PU4RACZL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDI43YGSUHTNPVK2DLEAMBCL1BJLY4V3EH1BSYEMOE1X4FN22EI5CM">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">5</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDE15AZIQMBCGHCVUNDGGAALUVUGLYKFLBXVDMLNBECCU1VNWB4PG">Clearance Constraint (Gap=0.254mm) (InNamedPolygon('GND')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBNVGUO2NXFXMJBEPJZ2SO1BTI5FEMJQVWJYMGJMV54GKJNWNJ0N">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNOIOVFY5BXUUKMCWBMUCJB3WNBDPBHU20WSHFSFIOIAOWFG21QXB">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">13</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXWZHK5HOKEWKEZXKOHSPQQCQ5JRTYMC1SQH4X2GJCJGSHC4MGG3L">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQLNVRQVHVED0FRLAYE5JDRLNUPKL1LQQLTUWXGBG115OEWETPXOI">Width Constraint (Min=0.2mm) (Max=2mm) (Preferred=0.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDY1KJE5PBPQ13HULK3RPCNKW0W2A5XW0YHJWJWHC2SKFOEZU1XWN">SMD To Corner (Distance=0.25mm) (All)</a></td>
+<td class="column2">18</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKCZKST1BVRCIDA4TLK1RMBHYYC4I10XGM3O32UIXIRGA4LBG1MS">SMD To Plane Constraint (Distance=5mm) (All)</a></td>
+<td class="column2">47</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1NRQBJQVV3YFLHBGEMHPJ2KW0MSHP4TUYN4I1VHB04LXBMHGZ41K">SMD Neck-Down Constraint (Percent=50%) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJVSZEM51YI1DJ4DBK2JLMUX1KISK4XZRCDAYGLO1XBSQDFVA2JBN">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMCZ32OOLR3D4BAKDHVO2ODHYKTIPE1Z3QDT3ICV0WHUUSAIMZJ">Height Constraint (Min=0mm) (Max=50.8mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">83</td>
+</tr>
+</table><br><a name="IDI43YGSUHTNPVK2DLEAMBCL1BJLY4V3EH1BSYEMOE1X4FN22EI5CM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.2mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2835.989mil|Location2.X=2845.113mil|Location1.Y=2647.161mil|Location2.Y=2656.285mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2835.989mil|Location2.X=2845.113mil|Location1.Y=2647.161mil|Location2.Y=2656.285mil|Absolute=True">Clearance Constraint: (0.15mm &lt; 0.2mm) Between Pad U11-1(28.666mm,34.475mm) on Top Layer And Pad U11-9(27.25mm,35.225mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2835.989mil|Location2.X=2845.113mil|Location1.Y=2710.989mil|Location2.Y=2720.113mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2835.989mil|Location2.X=2845.113mil|Location1.Y=2710.989mil|Location2.Y=2720.113mil|Absolute=True">Clearance Constraint: (0.15mm &lt; 0.2mm) Between Pad U11-4(28.666mm,35.975mm) on Top Layer And Pad U11-9(27.25mm,35.225mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2765.123mil|Location2.X=2774.247mil|Location1.Y=2710.989mil|Location2.Y=2720.113mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2765.123mil|Location2.X=2774.247mil|Location1.Y=2710.989mil|Location2.Y=2720.113mil|Absolute=True">Clearance Constraint: (0.15mm &lt; 0.2mm) Between Pad U11-5(25.834mm,35.975mm) on Top Layer And Pad U11-9(27.25mm,35.225mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2765.123mil|Location2.X=2774.247mil|Location1.Y=2691.304mil|Location2.Y=2700.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2765.123mil|Location2.X=2774.247mil|Location1.Y=2691.304mil|Location2.Y=2700.428mil|Absolute=True">Clearance Constraint: (0.15mm &lt; 0.2mm) Between Pad U11-6(25.834mm,35.475mm) on Top Layer And Pad U11-9(27.25mm,35.225mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2765.123mil|Location2.X=2774.247mil|Location1.Y=2651.934mil|Location2.Y=2661.058mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2765.123mil|Location2.X=2774.247mil|Location1.Y=2651.934mil|Location2.Y=2661.058mil|Absolute=True">Clearance Constraint: (0.15mm &lt; 0.2mm) Between Pad U11-8(25.834mm,34.475mm) on Top Layer And Pad U11-9(27.25mm,35.225mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDNOIOVFY5BXUUKMCWBMUCJB3WNBDPBHU20WSHFSFIOIAOWFG21QXB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3919.351mil|Location2.X=3959.645mil|Location1.Y=1523.053mil|Location2.Y=1571.684mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3919.351mil|Location2.X=3959.645mil|Location1.Y=1523.053mil|Location2.Y=1571.684mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.231mil|Location2.X=3912.751mil|Location1.Y=1540.248mil|Location2.Y=1573.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.231mil|Location2.X=3912.751mil|Location1.Y=1540.248mil|Location2.Y=1573.594mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3857.695mil|Location2.X=3876.278mil|Location1.Y=1577.242mil|Location2.Y=1590.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3857.695mil|Location2.X=3876.278mil|Location1.Y=1577.242mil|Location2.Y=1590.615mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3966.245mil|Location2.X=3999.766mil|Location1.Y=1540.248mil|Location2.Y=1573.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3966.245mil|Location2.X=3999.766mil|Location1.Y=1540.248mil|Location2.Y=1573.594mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4024.602mil|Location2.X=4053.086mil|Location1.Y=1523.574mil|Location2.Y=1590.789mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4024.602mil|Location2.X=4053.086mil|Location1.Y=1523.574mil|Location2.Y=1590.789mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4002.545mil|Location2.X=4021.128mil|Location1.Y=1577.242mil|Location2.Y=1590.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4002.545mil|Location2.X=4021.128mil|Location1.Y=1577.242mil|Location2.Y=1590.615mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3825.737mil|Location2.X=3854.221mil|Location1.Y=1523.574mil|Location2.Y=1590.789mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3825.737mil|Location2.X=3854.221mil|Location1.Y=1523.574mil|Location2.Y=1590.789mil|Absolute=True">Un-Routed Net Constraint: Region (0 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.895mil|Location2.X=4047.528mil|Location1.Y=1607.983mil|Location2.Y=1790.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.895mil|Location2.X=4047.528mil|Location1.Y=1607.983mil|Location2.Y=1790.349mil|Absolute=True">Un-Routed Net Constraint: Region (3 hole(s)) Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4160.565mil|Location2.X=4231.872mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4160.565mil|Location2.X=4231.872mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True">Isolated copper: Split Plane  (3V3) on Power Plane. Dead copper detected. Copper area is : 0.881 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1752.38mil|Location2.X=1823.687mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1752.38mil|Location2.X=1823.687mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True">Isolated copper: Split Plane  (3V3) on Power Plane. Dead copper detected. Copper area is : 0.881 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4160.565mil|Location2.X=4231.872mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4160.565mil|Location2.X=4231.872mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True">Isolated copper: Split Plane  (GND) on Ground Plane. Dead copper detected. Copper area is : 0.881 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1752.38mil|Location2.X=1823.687mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1752.38mil|Location2.X=1823.687mil|Location1.Y=1319.309mil|Location2.Y=1390.615mil|Absolute=True">Isolated copper: Split Plane  (GND) on Ground Plane. Dead copper detected. Copper area is : 0.881 sq. mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2749.685mil|Location2.X=2801.496mil|Location1.Y=3455.394mil|Location2.Y=3507.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2749.685mil|Location2.X=2801.496mil|Location1.Y=3455.394mil|Location2.Y=3507.205mil|Absolute=True">Un-Routed Net Constraint: Via (26.5mm,55.425mm) from Top Layer to Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDY1KJE5PBPQ13HULK3RPCNKW0W2A5XW0YHJWJWHC2SKFOEZU1XWN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">SMD To Corner (Distance=0.25mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1917.807mil|Location2.X=1920.776mil|Location1.Y=3486.212mil|Location2.Y=3489.181mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1917.807mil|Location2.X=1920.776mil|Location1.Y=3486.212mil|Location2.Y=3489.181mil|Absolute=True">SMD To Corner Constraint: (0.125mm &lt; 0.25mm) Between Pad C44-1(4.75mm,55.075mm) on Top Layer And Track (4.75mm,55.075mm)(4.75mm,55.65mm) on Top Layer Actual Distance = 0.125mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.488mil|Location2.X=2909.457mil|Location1.Y=2711.114mil|Location2.Y=2714.083mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.488mil|Location2.X=2909.457mil|Location1.Y=2711.114mil|Location2.Y=2714.083mil|Absolute=True">SMD To Corner Constraint: (0.125mm &lt; 0.25mm) Between Pad C51-2(30.375mm,35.9mm) on Top Layer And Track (29.8mm,35.9mm)(30.375mm,35.9mm) on Top Layer Actual Distance = 0.125mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3681.587mil|Location2.X=3684.555mil|Location1.Y=3627.945mil|Location2.Y=3630.913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3681.587mil|Location2.X=3684.555mil|Location1.Y=3627.945mil|Location2.Y=3630.913mil|Absolute=True">SMD To Corner Constraint: (0.175mm &lt; 0.25mm) Between Pad ERASE-1(49.55mm,60.775mm) on Top Layer And Track (49.55mm,59.1mm)(49.55mm,60.775mm) on Top Layer Actual Distance = 0.175mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3860.72mil|Location2.X=3863.689mil|Location1.Y=4447.711mil|Location2.Y=4450.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3860.72mil|Location2.X=3863.689mil|Location1.Y=4447.711mil|Location2.Y=4450.68mil|Absolute=True">SMD To Corner Constraint: (0.069mm &lt; 0.25mm) Between Pad H1-6(54.1mm,80.65mm) on Multi-Layer And Track (54.1mm,79.975mm)(54.1mm,80.65mm) on Top Layer Actual Distance = 0.069mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3498.89mil|Location2.X=3501.858mil|Location1.Y=4268.651mil|Location2.Y=4271.619mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3498.89mil|Location2.X=3501.858mil|Location1.Y=4268.651mil|Location2.Y=4271.619mil|Absolute=True">SMD To Corner Constraint: (0.204mm &lt; 0.25mm) Between Pad IR1-2(45.06mm,76.3mm) on Multi-Layer And Track (44.91mm,75.36mm)(44.91mm,76.15mm) on Bottom Layer Actual Distance = 0.204mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3962.591mil|Location2.X=3965.559mil|Location1.Y=1867.61mil|Location2.Y=1870.579mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3962.591mil|Location2.X=3965.559mil|Location1.Y=1867.61mil|Location2.Y=1870.579mil|Absolute=True">SMD To Corner Constraint: (0.125mm &lt; 0.25mm) Between Pad Q4-3(57mm,14.475mm) on Top Layer And Track (56.625mm,14.475mm)(57mm,14.475mm) on Top Layer Actual Distance = 0.125mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4117.61mil|Location2.X=4120.579mil|Location1.Y=1664.854mil|Location2.Y=1667.823mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4117.61mil|Location2.X=4120.579mil|Location1.Y=1664.854mil|Location2.Y=1667.823mil|Absolute=True">SMD To Corner Constraint: (0.15mm &lt; 0.25mm) Between Pad Q5-1(60.625mm,8.5mm) on Top Layer And Track (60.625mm,8.5mm)(60.625mm,9.4mm) on Top Layer Actual Distance = 0.15mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3369.436mil|Location2.X=3372.404mil|Location1.Y=3677.275mil|Location2.Y=3680.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3369.436mil|Location2.X=3372.404mil|Location1.Y=3677.275mil|Location2.Y=3680.244mil|Absolute=True">SMD To Corner Constraint: (0.193mm &lt; 0.25mm) Between Pad R1-1(41.175mm,60.7mm) on Top Layer And Track (41.335mm,60.44mm)(41.718mm,60.44mm) on Top Layer Actual Distance = 0.193mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4004.421mil|Location2.X=4007.39mil|Location1.Y=1959.146mil|Location2.Y=1962.114mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4004.421mil|Location2.X=4007.39mil|Location1.Y=1959.146mil|Location2.Y=1962.114mil|Absolute=True">SMD To Corner Constraint: (0.1mm &lt; 0.25mm) Between Pad R23-1(57.75mm,17.2mm) on Top Layer And Track (57.75mm,16.75mm)(57.75mm,17.2mm) on Top Layer Actual Distance = 0.1mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2774.597mil|Location2.X=2780.512mil|Location1.Y=2072.902mil|Location2.Y=2078.746mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2774.597mil|Location2.X=2780.512mil|Location1.Y=2072.902mil|Location2.Y=2078.746mil|Absolute=True">SMD To Corner Constraint: (0.177mm &lt; 0.25mm) Between Pad SHUNT-1(25.8mm,18.8mm) on Top Layer And Track (25.8mm,19.05mm)(26.575mm,19.825mm) on Top Layer Actual Distance = 0.177mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2832.671mil|Location2.X=2838.515mil|Location1.Y=2075.778mil|Location2.Y=2081.693mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2832.671mil|Location2.X=2838.515mil|Location1.Y=2075.778mil|Location2.Y=2081.693mil|Absolute=True">SMD To Corner Constraint: (0.177mm &lt; 0.25mm) Between Pad SHUNT-2(28.7mm,18.8mm) on Top Layer And Track (27.925mm,19.825mm)(28.7mm,19.05mm) on Top Layer Actual Distance = 0.177mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2882.374mil|Location2.X=2885.343mil|Location1.Y=3911.12mil|Location2.Y=3914.088mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2882.374mil|Location2.X=2885.343mil|Location1.Y=3911.12mil|Location2.Y=3914.088mil|Absolute=True">SMD To Corner Constraint: (0.14mm &lt; 0.25mm) Between Pad U1-14(29.25mm,65.525mm) on Top Layer And Track (29.25mm,65.525mm)(29.25mm,66.45mm) on Top Layer Actual Distance = 0.14mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2862.689mil|Location2.X=2865.657mil|Location1.Y=3908.392mil|Location2.Y=3911.36mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2862.689mil|Location2.X=2865.657mil|Location1.Y=3908.392mil|Location2.Y=3911.36mil|Absolute=True">SMD To Corner Constraint: (0.001mm &lt; 0.25mm) Between Pad U1-15(28.75mm,65.525mm) on Top Layer And Track (28.75mm,65.525mm)(28.75mm,66.311mm) on Top Layer Actual Distance = 0.001mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3118.595mil|Location2.X=3121.563mil|Location1.Y=3844.77mil|Location2.Y=3847.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3118.595mil|Location2.X=3121.563mil|Location1.Y=3844.77mil|Location2.Y=3847.738mil|Absolute=True">SMD To Corner Constraint: (0.09mm &lt; 0.25mm) Between Pad U1-2(35.25mm,65.525mm) on Top Layer And Track (35.25mm,64.65mm)(35.25mm,65.525mm) on Top Layer Actual Distance = 0.09mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2742.183mil|Location2.X=2745.152mil|Location1.Y=3650.091mil|Location2.Y=3653.059mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2742.183mil|Location2.X=2745.152mil|Location1.Y=3650.091mil|Location2.Y=3653.059mil|Absolute=True">SMD To Corner Constraint: (0.001mm &lt; 0.25mm) Between Pad U1-25(26.475mm,59.75mm) on Top Layer And Track (25.689mm,59.75mm)(26.475mm,59.75mm) on Top Layer Actual Distance = 0.001mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3239.86mil|Location2.X=3242.829mil|Location1.Y=3551.665mil|Location2.Y=3554.634mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3239.86mil|Location2.X=3242.829mil|Location1.Y=3551.665mil|Location2.Y=3554.634mil|Absolute=True">SMD To Corner Constraint: (0.04mm &lt; 0.25mm) Between Pad U1-51(37.525mm,57.25mm) on Top Layer And Track (37.525mm,57.25mm)(38.35mm,57.25mm) on Top Layer Actual Distance = 0.04mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3241.829mil|Location2.X=3244.797mil|Location1.Y=3630.406mil|Location2.Y=3633.374mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3241.829mil|Location2.X=3244.797mil|Location1.Y=3630.406mil|Location2.Y=3633.374mil|Absolute=True">SMD To Corner Constraint: (0.14mm &lt; 0.25mm) Between Pad U1-55(37.525mm,59.25mm) on Top Layer And Track (37.525mm,59.25mm)(38.45mm,59.25mm) on Top Layer Actual Distance = 0.14mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1865.642mil|Location2.X=1871.557mil|Location1.Y=3493.671mil|Location2.Y=3499.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1865.642mil|Location2.X=1871.557mil|Location1.Y=3493.671mil|Location2.Y=3499.516mil|Absolute=True">SMD To Corner Constraint: (0.212mm &lt; 0.25mm) Between Pad U9-1(3.8mm,56.425mm) on Top Layer And Track (3.35mm,55.775mm)(3.725mm,56.15mm) on Top Layer Actual Distance = 0.212mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDKCZKST1BVRCIDA4TLK1RMBHYYC4I10XGM3O32UIXIRGA4LBG1MS"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">SMD To Plane Constraint (Distance=5mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.327mil|Location2.X=3874.149mil|Location1.Y=3667.807mil|Location2.Y=3724.959mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.327mil|Location2.X=3874.149mil|Location1.Y=3667.807mil|Location2.Y=3724.959mil|Absolute=True">SMD To Plane Constraint: Between Pad 3V3-1(52.125mm,60.775mm) on Top Layer And Pad H2-8(57.535mm,66.895mm) on Multi-Layer Actual Distance = 9.322mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-24.122mil|Location2.X=89.7mil|Location1.Y=-24.122mil|Location2.Y=33.03mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-24.122mil|Location2.X=89.7mil|Location1.Y=-24.122mil|Location2.Y=33.03mil|Absolute=True">SMD To Plane Constraint: Pad 5V-1(20.9mm,4.8mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C10-1(10.675mm,40.375mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C14-2(5.325mm,41.65mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C15-1(13.95mm,33.95mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True">SMD To Plane Constraint: Pad C33-1(22.75mm,19.45mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True">SMD To Plane Constraint: Pad C34-1(19.377mm,19.454mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True">SMD To Plane Constraint: Pad C36-1(16.15mm,20.575mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C37-1(20mm,37.3mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2454.618mil|Location2.X=2534.425mil|Location1.Y=2757.768mil|Location2.Y=2790.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2454.618mil|Location2.X=2534.425mil|Location1.Y=2757.768mil|Location2.Y=2790.764mil|Absolute=True">SMD To Plane Constraint: Between Pad C37-2(18.6mm,37.3mm) on Top Layer And Via (14.95mm,31.05mm) from Top Layer to Bottom Layer Actual Distance = 7.762mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True">SMD To Plane Constraint: Pad C42-2(20.975mm,10.675mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-13.492mil|Location2.X=78.613mil|Location1.Y=-13.492mil|Location2.Y=25.533mil|Absolute=True">SMD To Plane Constraint: Pad C43-2(19.174mm,10.675mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C44-1(4.75mm,55.075mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C5-2(34.5mm,53.075mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C6-1(5.325mm,48.025mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C6-2(5.325mm,49.425mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C7-1(10.375mm,48.01mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C9-1(8.55mm,33.6mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad C9-2(8.55mm,35mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-28.846mil|Location2.X=93.04mil|Location1.Y=-28.846mil|Location2.Y=36.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-28.846mil|Location2.X=93.04mil|Location1.Y=-28.846mil|Location2.Y=36.37mil|Absolute=True">SMD To Plane Constraint: Pad D1-1(14.125mm,15.175mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-30.028mil|Location2.X=93.876mil|Location1.Y=-30.028mil|Location2.Y=37.206mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-30.028mil|Location2.X=93.876mil|Location1.Y=-30.028mil|Location2.Y=37.206mil|Absolute=True">SMD To Plane Constraint: Pad L5-2(16mm,6.35mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-6.406mil|Location2.X=61.072mil|Location1.Y=-9.472mil|Location2.Y=20.572mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-6.406mil|Location2.X=61.072mil|Location1.Y=-9.472mil|Location2.Y=20.572mil|Absolute=True">SMD To Plane Constraint: Pad Q6-2(59.275mm,8.45mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.768mil|Location2.X=66.903mil|Location1.Y=-8.768mil|Location2.Y=22.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.768mil|Location2.X=66.903mil|Location1.Y=-8.768mil|Location2.Y=22.223mil|Absolute=True">SMD To Plane Constraint: Pad R30-2(27.1mm,38.4mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.768mil|Location2.X=66.903mil|Location1.Y=-8.768mil|Location2.Y=22.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.768mil|Location2.X=66.903mil|Location1.Y=-8.768mil|Location2.Y=22.223mil|Absolute=True">SMD To Plane Constraint: Pad R5-1(56.275mm,78.8mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad STAT0-2(62.525mm,42.4mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-9.949mil|Location2.X=69.858mil|Location1.Y=-9.949mil|Location2.Y=23.048mil|Absolute=True">SMD To Plane Constraint: Pad STAT1-2(62.525mm,43.75mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True">SMD To Plane Constraint: Pad U1-1(35.75mm,65.525mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.364mil|Location2.X=56.412mil|Location1.Y=-11.613mil|Location2.Y=18.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.364mil|Location2.X=56.412mil|Location1.Y=-11.613mil|Location2.Y=18.432mil|Absolute=True">SMD To Plane Constraint: Pad U11-2(28.666mm,34.975mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.364mil|Location2.X=56.412mil|Location1.Y=-11.613mil|Location2.Y=18.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.364mil|Location2.X=56.412mil|Location1.Y=-11.613mil|Location2.Y=18.432mil|Absolute=True">SMD To Plane Constraint: Pad U11-3(28.666mm,35.475mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.364mil|Location2.X=56.412mil|Location1.Y=-11.613mil|Location2.Y=18.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.364mil|Location2.X=56.412mil|Location1.Y=-11.613mil|Location2.Y=18.432mil|Absolute=True">SMD To Plane Constraint: Pad U11-7(25.834mm,34.975mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True">SMD To Plane Constraint: Pad U1-17(26.475mm,63.75mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True">SMD To Plane Constraint: Pad U1-18(26.475mm,63.25mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True">SMD To Plane Constraint: Pad U1-58(37.525mm,60.75mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.453mil|Location2.X=56.474mil|Location1.Y=-11.55mil|Location2.Y=18.494mil|Absolute=True">SMD To Plane Constraint: Pad U1-7(32.75mm,65.525mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True">SMD To Plane Constraint: Pad U2-1(6.875mm,41.425mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True">SMD To Plane Constraint: Pad U2-6(9.275mm,41.425mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True">SMD To Plane Constraint: Pad U3-1(6.675mm,49.16mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True">SMD To Plane Constraint: Pad U3-6(9.075mm,49.16mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-11.13mil|Location2.X=72.783mil|Location1.Y=-11.13mil|Location2.Y=23.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-11.13mil|Location2.X=72.783mil|Location1.Y=-11.13mil|Location2.Y=23.873mil|Absolute=True">SMD To Plane Constraint: Pad U4-2(3.429mm,67.05mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True">SMD To Plane Constraint: Pad U5-1(10.15mm,35mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-8.177mil|Location2.X=65.435mil|Location1.Y=-8.229mil|Location2.Y=21.815mil|Absolute=True">SMD To Plane Constraint: Pad U5-6(12.55mm,35mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-6.5mil|Location2.X=61.279mil|Location1.Y=-9.405mil|Location2.Y=20.639mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-6.5mil|Location2.X=61.279mil|Location1.Y=-9.405mil|Location2.Y=20.639mil|Absolute=True">SMD To Plane Constraint: Pad U7-6(9.464mm,23.535mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-6.5mil|Location2.X=61.279mil|Location1.Y=-9.405mil|Location2.Y=20.639mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-6.5mil|Location2.X=61.279mil|Location1.Y=-9.405mil|Location2.Y=20.639mil|Absolute=True">SMD To Plane Constraint: Pad U7-7(9.464mm,22.265mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-7.587mil|Location2.X=63.958mil|Location1.Y=-8.647mil|Location2.Y=21.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-7.587mil|Location2.X=63.958mil|Location1.Y=-8.647mil|Location2.Y=21.398mil|Absolute=True">SMD To Plane Constraint: Pad U8-1(18.721mm,39.3mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2536.537mil|Location2.X=2608.081mil|Location1.Y=2837.81mil|Location2.Y=2867.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2536.537mil|Location2.X=2608.081mil|Location1.Y=2837.81mil|Location2.Y=2867.854mil|Absolute=True">SMD To Plane Constraint: Between Pad U8-3(20.621mm,39.3mm) on Top Layer And Via (14.95mm,31.05mm) from Top Layer to Bottom Layer Actual Distance = 12.137mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-7.587mil|Location2.X=63.958mil|Location1.Y=-8.647mil|Location2.Y=21.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-7.587mil|Location2.X=63.958mil|Location1.Y=-8.647mil|Location2.Y=21.398mil|Absolute=True">SMD To Plane Constraint: Pad U8-5(18.721mm,42mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-7.587mil|Location2.X=63.958mil|Location1.Y=-8.647mil|Location2.Y=21.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=W:\Uni Projects\wacky-races-group-2\WackyCar\Altium\Wacky_Racers_Vehicle\Wacky_Car.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-7.587mil|Location2.X=63.958mil|Location1.Y=-8.647mil|Location2.Y=21.398mil|Absolute=True">SMD To Plane Constraint: Pad U9-1(3.8mm,56.425mm) on Top Layer Actual Distance = 2539.975mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
